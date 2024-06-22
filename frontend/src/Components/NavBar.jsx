@@ -7,6 +7,8 @@ import { AiTwotoneAppstore } from "react-icons/ai";
 import { RxAvatar } from "react-icons/rx";
 
 const NavBar = () => {
+  const user = false;
+
   return (
     <div className="flex items-center justify-between mx-0 h-12  ">
       <div className="flex items-center gap-10">
@@ -22,28 +24,32 @@ const NavBar = () => {
           <h1 className="text-2xl text-gray-500 font-medium">Gmail</h1>
         </div>
       </div>
-      <div className="w-[50%] mr-30">
-        <div className="flex items-center bg-gray-100 px-2 py-3 rounded-full">
-          <TbMailSearch size={"20px"} className="text-gray-500 mx-3" />
-          <input
-            type="text"
-            placeholder="Type here to Search Mail"
-            className="rouded-full w-full bg-transparent outline-none px-1"
-          />
-          <IoFilter size={"20px"} className="text-gray-500 mx-3" />
-        </div>
-      </div>
-      <div className="flex ">
-        <div className=" p-3 flex rounded-full hover:bg-gray-200">
-          <AiTwotoneAppstore size={"20px"} />
-        </div>
-        <div className="p-3 flex rounded-full hover:bg-gray-200">
-          <FcSettings size={"20px"} />
-        </div>
-        <div className="p-3 flex rounded-full hover:bg-gray-200">
-          <RxAvatar size={"20px"} />
-        </div>
-      </div>
+      {user && (
+        <>
+          <div className="w-[50%] mr-30">
+            <div className="flex items-center bg-gray-100 px-2 py-3 rounded-full">
+              <TbMailSearch size={"20px"} className="text-gray-500 mx-3" />
+              <input
+                type="text"
+                placeholder="Type here to Search Mail"
+                className="rouded-full w-full bg-transparent outline-none px-1"
+              />
+              <IoFilter size={"20px"} className="text-gray-500 mx-3" />
+            </div>
+          </div>
+          <div className="flex ">
+            <div className=" p-3 flex rounded-full hover:bg-gray-200">
+              <AiTwotoneAppstore size={"20px"} />
+            </div>
+            <div className="p-3 flex rounded-full hover:bg-gray-200">
+              <FcSettings size={"20px"} />
+            </div>
+            <div className="p-3 flex rounded-full hover:bg-gray-200">
+              <RxAvatar size={"20px"} />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
