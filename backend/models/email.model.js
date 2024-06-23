@@ -1,20 +1,20 @@
 import mongoose from "mongoose";
 
 const emailSchema = new mongoose.Schema({
-  fullname:{
+  to:{
     type:String,
     required:true
   },
-  email:{
+  subject:{
     type:String,
     required:true
   },
-  password:{
+  nessage:{
     type:String,
     required:true
   },
 
-},{timestamps});
+},{timestamps:true});
 
 export const Email = mongoose.model("Email",emailSchema);
 

@@ -1,10 +1,10 @@
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   try {
-    const [fullname, email, password] = req.body;
+    const { fullname, email, password } = req.body;
     //check null values if any
     if (!fullname || !email || !password) {
       return res
@@ -41,7 +41,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const [email, password] = req.body;
+    const {email, password} = req.body;
 
     //check null values if any
     if (!email || !password) {
