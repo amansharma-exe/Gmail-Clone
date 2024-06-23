@@ -1,57 +1,83 @@
-import React from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { TbMailSearch } from "react-icons/tb";
-import { IoFilter } from "react-icons/io5";
-import { FcSettings } from "react-icons/fc";
-import { AiTwotoneAppstore } from "react-icons/ai";
-import { RxAvatar } from "react-icons/rx";
+import React, { useEffect, useState } from 'react'
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoIosSearch } from "react-icons/io";
+import { CiCircleQuestion } from "react-icons/ci";
+import { IoIosSettings } from "react-icons/io";
+import { TbGridDots } from "react-icons/tb";
+import Avatar from 'react-avatar';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAuthUser, setSearchText } from '../redux/appSlice';
+import axios from 'axios';
+import toast from "react-hot-toast"
+import { useNavigate } from 'react-router-dom';
 
-const NavBar = () => {
-  const user = false;
+const Navbar = () => {
+    const [text, setText] = useState("");
+    const { user } = useSelector(store => store.app);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const logoutHandler = async () => {
+        try {
+            const res = await axios.get('http://localhost:8080/api/v1/user/logout',{withCredentials:true});
+            console.log(res);
+            toast.success(res.data.message);
+            dispatch(setAuthUser(null));
+            navigate("/login");
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-  return (
-    <div className="flex items-center justify-between mx-0 h-12  ">
-      <div className="flex items-center gap-10">
-        <div className="flex items-center gap-2">
-          <div className="p-3 hover:bg-gray-200 rounded-full cursor-pointer">
-            <GiHamburgerMenu />
-          </div>
-          <img
-            className="w-8 h-8"
-            src="https://w7.pngwing.com/pngs/608/931/png-transparent-gmail-new-logo-icon.png"
-            alt="logo"
-          />
-          <h1 className="text-2xl text-gray-500 font-medium">Gmail</h1>
+    useEffect(() => {
+        dispatch(setSearchText(text));
+    }, [text]);
+
+
+    return (
+        <div className='flex items-center justify-between mx-3 h-16'>
+            <div className='flex items-center gap-10'>
+                <div className='flex items-center gap-2'>
+                    <div className='p-3 hover:bg-gray-200 rounded-full cursor-pointer'>
+                        <RxHamburgerMenu />
+                    </div>
+                    <img className='w-8' src="https://mailmeteor.com/logos/assets/PNG/Gmail_Logo_512px.png" alt="logo" />
+                    <h1 className='text-2xl text-gray-500 font-medium'>Gmail</h1>
+                </div>
+            </div>
+            {
+                user && (
+                    <>
+                        <div className='w-[50%] mr-60'>
+                            <div className='flex items-center bg-[#EAF1FB] px-2 py-3 rounded-full'>
+                                <IoIosSearch size={'24px'} className='text-gray-700' />
+                                <input
+                                    type="text"
+                                    value={text}
+                                    onChange={(e) => setText(e.target.value)}
+                                    placeholder='Search Mail'
+                                    className='rounded-full w-full bg-transparent outline-none px-1'
+                                />
+                            </div>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <div className='p-2 rounded-full hover:bg-gray-200 cursor-pointer'>
+                                <CiCircleQuestion size={'24px'} />
+                            </div>
+                            <div className='p-2 rounded-full hover:bg-gray-200 cursor-pointer'>
+                                <IoIosSettings size={'24px'} />
+                            </div>
+                            <div className='p-2 rounded-full hover:bg-gray-200 cursor-pointer'>
+                                <TbGridDots size={'24px'} />
+                            </div>
+                            <span onClick={logoutHandler} className='underline cursor-pointer'>Logout</span>
+                            <Avatar src={user.profilePhoto} size="40" round={true} />
+                        </div>
+                    </>
+                )
+            }
+
         </div>
-      </div>
-      {user && (
-        <>
-          <div className="w-[50%] mr-30">
-            <div className="flex items-center bg-gray-100 px-2 py-3 rounded-full">
-              <TbMailSearch size={"20px"} className="text-gray-500 mx-3" />
-              <input
-                type="text"
-                placeholder="Type here to Search Mail"
-                className="rouded-full w-full bg-transparent outline-none px-1"
-              />
-              <IoFilter size={"20px"} className="text-gray-500 mx-3" />
-            </div>
-          </div>
-          <div className="flex ">
-            <div className=" p-3 flex rounded-full hover:bg-gray-200">
-              <AiTwotoneAppstore size={"20px"} />
-            </div>
-            <div className="p-3 flex rounded-full hover:bg-gray-200">
-              <FcSettings size={"20px"} />
-            </div>
-            <div className="p-3 flex rounded-full hover:bg-gray-200">
-              <RxAvatar size={"20px"} />
-            </div>
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
+    )
+}
 
-export default NavBar;
+export default Navbar
