@@ -6,7 +6,7 @@ import { IoIosSettings } from "react-icons/io";
 import { TbGridDots } from "react-icons/tb";
 import Avatar from 'react-avatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuthUser, setSearchText } from '../redux/appSlice';
+import { setAuthUser, setSearchText } from '../Redux/AppSlice';
 import axios from 'axios';
 import toast from "react-hot-toast"
 import { useNavigate } from 'react-router-dom';
