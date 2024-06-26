@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { setEmails } from "../redux/appSlice";
+import { setEmails } from "../Redux/AppSlice";
 
 const useGetAllEmails = () => {
     const dispatch = useDispatch();
