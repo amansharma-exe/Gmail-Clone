@@ -1,4 +1,4 @@
-import express from "express"; 
+import express from "express"; // react style
 import dotenv from "dotenv";
 import connectDB from "./db/connectDB.js";
 import cookieParser from "cookie-parser";
