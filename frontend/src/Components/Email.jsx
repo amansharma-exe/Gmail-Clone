@@ -3,7 +3,7 @@ import { MdCropSquare } from 'react-icons/md'
 import { MdOutlineStarBorder } from "react-icons/md";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setSelectedEmail } from '../redux/appSlice';
+import { setSelectedEmail } from '../Redux/AppSlice';
 
 const Email = ({email}) => {
     const navigate = useNavigate();
