@@ -4,7 +4,7 @@ import { LuPencil } from "react-icons/lu";
 import { MdInbox, MdMore, MdOutlineDrafts, MdOutlineKeyboardArrowDown, MdOutlineWatchLater } from "react-icons/md";
 import { TbSend2 } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
-import { setOpen } from '../redux/appSlice';
+import { setOpen } from '../Redux/AppSlice';
 
 const sidebarItems = [
     {
