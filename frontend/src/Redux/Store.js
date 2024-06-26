@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import appSlice from "./appSlice";
+import appSlice from "./AppSlice.js";
 import {
     persistStore,
     persistReducer,
